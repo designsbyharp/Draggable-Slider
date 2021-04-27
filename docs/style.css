@@ -10,7 +10,6 @@
   top: 30%;
   width: 80%;
   height: 20vh;
-  border: 1px solid red;
   overflow: hidden;
 }
 
@@ -25,7 +24,6 @@
   gap: 1.5rem;
   pointer-events: none;
   transition: 0s ease-in;
-  border: 1px solid green;
 }
 
 .slide {

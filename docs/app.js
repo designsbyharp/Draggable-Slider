@@ -1,12 +1,57 @@
 let draggableSlider = function () {
   // DOM element(s)
-  const header = document.querySelector("header");
+  let slider = document.querySelector(".slider"),
+    innerSlider = document.querySelector(".slider-inner");
 
-  // variables to use, for storing scroll data
-  let prevScrollPos = 0;
-  let currentScrollPosition;
+  // Slider variables
+  let pressed = false,
+    startX,
+    x;
 
-  // Window.onscroll - call toggleNavbar()
+  // Mousedown eventlistener
+  slider.addEventListener("mousedown", (e) => {
+    pressed = true;
+    startX = e.offsetX - innerSlider.offsetLeft;
+    slider.style.cursor = "grabbing";
+  });
+
+  // mouseneter
+  slider.addEventListener("mouseenter", () => {
+    slider.style.cursor = "grab";
+  });
+
+  // mouseup
+  slider.addEventListener("mouseup", () => {
+    slider.style.cursor = "grab";
+  });
+
+  // window
+  window.addEventListener("mouseup", () => {
+    pressed = false;
+  });
+
+  slider.addEventListener("mousemove", (e) => {
+    if (!pressed) return;
+    e.preventDefault();
+
+    x = e.offsetX;
+
+    innerSlider.style.left = `${x - startX}px`;
+
+    checkBoundry();
+  });
+
+  // Check boundry of outer and inner sliders
+  function checkBoundry() {
+    let outer = slider.getBoundingClientRect(),
+      inner = innerSlider.getBoundingClientRect();
+
+    if (parseInt(innerSlider.style.left) > 0) {
+      innerSlider.style.left = "0px";
+    } else if (inner.right < outer.right) {
+      innerSlider.style.left = `-${inner.width - outer.width}px`;
+    }
+  }
 };
 
 // Invoke code
