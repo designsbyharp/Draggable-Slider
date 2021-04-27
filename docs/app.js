@@ -30,6 +30,7 @@ let draggableSlider = function () {
     pressed = false;
   });
 
+  // Slider mousemove event listener
   slider.addEventListener("mousemove", (e) => {
     if (!pressed) return;
     e.preventDefault();
